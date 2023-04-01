@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/api/1.0/house")
+@RequestMapping(value = "/api/v1.0/house")
 @RequiredArgsConstructor
 
     public class houseController {
