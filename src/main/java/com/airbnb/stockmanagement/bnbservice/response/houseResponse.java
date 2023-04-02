@@ -12,7 +12,7 @@ private Long houseId;
 private String houseName;
 private String houseDescription;
 private String houseAmenities;
-private Integer houseMaxquest;
+private int houseMaxguest;
 private Long productCreateDate;
 private Long productUpdateDate;
 }

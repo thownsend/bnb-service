@@ -69,6 +69,7 @@ public class houseRepositoryServiceImpl implements IhouseRepositoryService {
 
     @Override
     public house updateHouse(Language language, Long houseId, houseUpdateRequest houseUpdateRequest) {
+
         log.debug("[{}][updateHouse] -> request: {}", this.getClass().getSimpleName(),houseUpdateRequest);
         house house=getHouse(language,houseId);
         house.setHouseName(houseUpdateRequest.getHouseName());
@@ -102,12 +103,11 @@ public class houseRepositoryServiceImpl implements IhouseRepositoryService {
 
 
     @Override
-    public List<house>findAvailableHouses(Date startDate, Date endDate,int houseMaxguest) {
+    public List<house>findAvailableHouses(int houseMaxguest) {
         log.debug("[{}][getAvailableHouses]", this.getClass().getSimpleName());
-        List<house> houses = houseRepository.findAvailableHouses(startDate,endDate,houseMaxguest);
+        List<house> houses = houseRepository.findAvailableHouses(houseMaxguest);
         log.debug("[{}][getAvailableHouses] -> response: {}", this.getClass().getSimpleName(),houses);
         return houses;
-
     }
 
 }

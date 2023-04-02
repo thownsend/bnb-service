@@ -106,12 +106,11 @@ import java.util.stream.Collectors;
 
     @ApiOperation(value = "This endpoint get query product")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/available/{startDate}/{endDate}")
-    public InternalApiResponse<List<houseResponse>> findAvailableHouses(@PathVariable("startDate") Date startDate,
-                                                                        @PathVariable("endDate") Date endDate,
-                                                                        @RequestParam("houseMaxguest") int houseMaxguest) {
+    @GetMapping(value = "/available/{houseMaxguest}")
+    public InternalApiResponse<List<houseResponse>> findAvailableHouses( @PathVariable("houseMaxguest") int houseMaxguest) {
+
         log.debug("[{}][getAvailableHouses]", this.getClass().getSimpleName());
-        List<house> houses = houseRepositoryService.findAvailableHouses(startDate, endDate, houseMaxguest);
+        List<house> houses = houseRepositoryService.findAvailableHouses(houseMaxguest);
         List<houseResponse> houseResponses = convertHouseResponseList(houses);
         log.debug("[{}][getAvailableHouses] -> response: {}", this.getClass().getSimpleName(),houseResponses);
         return InternalApiResponse.<List<houseResponse>>builder()
@@ -150,7 +149,7 @@ import java.util.stream.Collectors;
                .map(arg -> houseResponse.builder()
                        .houseId(arg.getHouseId())
                        .houseName(arg.getHouseName())
-                       .houseMaxquest(arg.getHouseMaxguest())
+                       .houseMaxguest(arg.getHouseMaxguest())
                        .houseAmenities(arg.getHouseAmenities())
                        .houseDescription(arg.getHouseDescription())
                        .productUpdateDate(arg.getProductUpdateDate().getTime())
@@ -164,6 +163,7 @@ import java.util.stream.Collectors;
                 .houseName(house.getHouseName())
                 .houseDescription(house.getHouseDescription())
                 .houseAmenities(house.getHouseAmenities())
+                .houseMaxguest(house.getHouseMaxguest())
                 .productCreateDate(house.getProductCreatedDate().getTime())
                 .productUpdateDate(house.getProductUpdateDate().getTime())
                 .build();

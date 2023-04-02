@@ -19,7 +19,7 @@ public interface IhouseRepositoryService {
 
     house deleteHouse(Language language,Long houseId);
 
-    List<house> findAvailableHouses(Date startDate, Date endDate, int houseMaxguest);
+    List<house> findAvailableHouses(int houseMaxguest);
 
 
 }
